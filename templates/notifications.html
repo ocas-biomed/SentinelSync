@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notifications - SentinelSync</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="card">
+    <h2>Notifications <span class="badge">{{ notifications|length }}</span></h2>
+
+    {% if notifications %}
+      <ul>
+        {% for note in notifications %}
+          <li>
+            <strong>{{ note[1] }}</strong><br>
+            <small>{{ note[2][:10] }} • <a href="/resolve/{{ note[0] }}">Mark as resolved</a></small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No active notifications.</p>
+    {% endif %}
+
+    <p class="small-link"><a href="/dashboard">← Back to Dashboard</a></p>
+  </div>
+</body>
+</html>

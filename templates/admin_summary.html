@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Summary - SentinelSync</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="card">
+    <h2>All Submitted Reports</h2>
+
+    {% if reports %}
+      <ul>
+        {% for report in reports %}
+          <li style="margin-bottom: 2rem;">
+            <strong>{{ report[1] }}</strong><br>
+            Case #: {{ report[4] }}<br>
+            Severity: <span style="color: {{ 'red' if report[2] == 'Critical' else 'black' }}">{{ report[2] }}</span><br>
+            Time: {{ report[3][:10] }}<br>
+
+            <form method="post" action="/admin/review/{{ report[4] }}" style="margin-top: 0.5rem;">
+              <label for="status">Update Status:</label><br>
+              <select name="status" required>
+                <option value="" disabled selected>Choose one</option>
+                <option value="Reviewed">Reviewed</option>
+                <option value="Resolved">Resolved</option>
+                <option value="Needs Info">Needs Info</option>
+              </select>
+              <button type="submit">Submit</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No reports have been submitted yet.</p>
+    {% endif %}
+
+    <canvas id="summaryChart" style="margin-top: 2rem;"></canvas>
+
+    <p class="small-link"><a href="/dashboard">← Back to Dashboard</a></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    fetch('/api/report_summary')
+      .then(res => res.json())
+      .then(data => {
+        const ctx = document.getElementById('summaryChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: Object.keys(data),
+            datasets: [{
+              label: 'Reports by Severity',
+              data: Object.values(data),
+              backgroundColor: '#4A90E2'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              title: { display: true, text: 'Report Severity Overview' }
+            }
+          }
+        });
+      });
+  </script>
+</body>
+</html>

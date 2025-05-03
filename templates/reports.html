@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Reports on SentinelSync</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="centered-container">
+  <div class="card">
+    <h2>Your Submitted Reports</h2>
+    {% if reports %}
+      <ul>
+        {% for r in reports %}
+          <li>
+            <strong>{{ r[0] }}</strong> - {{ r[1] }} ({{ r[2][:10] }})<br>
+            <small>Case #: {{ r[3] }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No reports were found.</p>
+    {% endif %}
+    <p class="small-link"><a href="/dashboard">Back to Dashboard</a></p>
+  </div>
+</body>
+</html>

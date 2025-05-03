@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="centered-container">
+  <div class="card">
+    <h2>Welcome to SentinelSync</h2>
+    <p><strong>Role:</strong> {{ role }}</p>
+    <ul>
+      <li><a href="/submit">Create Report</a></li>
+      <li><a href="/notifications">View Notifications</a></li>
+      <li><a href="/reports">View Reports</a></li>
+      {% if role == 'admin' %}
+      <li><a href="/admin/summary">Admin Summary</a></li>
+      {% endif %}
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</body>
+</html>

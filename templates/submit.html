@@ -1,0 +1,35 @@
+ <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submit Report - SentinelSync</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="centered-container">
+  <div class="card">
+    <h2>Submit Sentinel Event</h2>
+    <form method="post">
+      <label>Title</label>
+      <input name="title" required>
+
+      <label>Description</label>
+      <textarea name="description" required></textarea>
+
+      <label>Severity</label>
+      <select name="severity" required>
+        <option value="Low">Low</option>
+        <option value="Moderate">Moderate</option>
+        <option value="High">High</option>
+        <option value="Critical">Critical</option>
+      </select>
+
+      <button type="submit">Submit Report</button>
+    </form>
+    <p class="small-link"><a href="/dashboard">Back to Dashboard</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - SentinelSync</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="card">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="SentinelSync Logo" class="logo">
+
+    <div class="user-icon"></div>
+    <h2>SentinelSync</h2>
+    <form method="post">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+
+      <button type="submit">Login</button>
+    </form>
+    <p class="small-link"><a href="/register">Register New Account</a></p>
+  </div>
+</body>
+</html>
