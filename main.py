@@ -6,12 +6,12 @@ import uuid
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
-# Initializes the Database
+# Initializes the sqlite3 Database
 def init_db():
     conn = sqlite3.connect('sentinel.db')
     cur = conn.cursor()
 
-    # Create tables if they don't exist
+    # Creates tables if new
     cur.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,13 +43,13 @@ def init_db():
         )
     ''')
 
-    # Patch: add 'status' column to reports
+    # Patch: adds a status column to reports
     try:
         cur.execute("ALTER TABLE reports ADD COLUMN status TEXT DEFAULT 'Pending'")
     except sqlite3.OperationalError:
         pass  # already exists
 
-    # Patch!! to add timestamp
+    # Patch!! to add a timestamp to reports
     try:
         cur.execute("ALTER TABLE notifications ADD COLUMN timestamp TEXT")
     except sqlite3.OperationalError:
@@ -68,7 +68,7 @@ def init_db():
 
 init_db()
 
-# --- User Verification ---
+# Verify User Credentials
 def verify_user(username, password):
     conn = sqlite3.connect('sentinel.db')
     cur = conn.cursor()
@@ -77,7 +77,7 @@ def verify_user(username, password):
     conn.close()
     return user
 
-# --- Routes ---
+# Routes like login, register, dashobard, reports, admin summarty, etc. to direct you to the right page
 @app.route('/')
 def home():
     if 'user_id' in session:

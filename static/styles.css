@@ -1,4 +1,4 @@
-/* Color Variables */
+/* Colors */
 :root {
   --bg-color: #a9c6c3;
   --button-blue: #4A90E2;
@@ -8,14 +8,13 @@
   --text-muted: #555;
 }
 
-/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Body Layout */
+/* Body*/
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: var(--bg-color);
@@ -23,7 +22,7 @@ body {
   padding: 2rem 1rem;
 }
 
-/* Card Container */
+/* Container */
 .card {
   background: var(--card-bg);
   padding: 2rem;
@@ -42,7 +41,7 @@ body {
 }
 
 
-/* Form Layout */
+/* This is the forms layout */
 form {
   display: flex;
   flex-direction: column;
@@ -114,7 +113,7 @@ canvas {
   height: 300px !important;
 }
 
-/* Mobile UI */
+/* To Scale for Mobile UI - tested by volunteers on several different apple/android devices to ensure compatibility */
 @media (max-width: 480px) {
   .card {
     padding: 1.5rem;
