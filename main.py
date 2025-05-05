@@ -5,8 +5,9 @@ import uuid
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
+# replace with a real secret key if in production
 
-# Initializes the sqlite3 Database
+# --- sqlite3 Database Setup ---
 def init_db():
     conn = sqlite3.connect('sentinel.db')
     cur = conn.cursor()
